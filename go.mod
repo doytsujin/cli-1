@@ -1,13 +1,13 @@
 module github.com/fnproject/cli
 
-replace github.com/fnproject/fn_go => /Users/rik/dev/go/src/github.com/fnproject/fn_go
+replace github.com/oracle/oci-go-sdk => bitbucket.oci.oraclecorp.com/sdk/oci-go-sdk.git v1.0.1-0.20191218185907-389f38d36df3
 
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/coreos/go-semver v0.2.0
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v0.0.0-20170926111411-5df930a27be2
-	github.com/fnproject/fn_go v0.5.0
+	github.com/fnproject/fn_go v0.0.0-20200228195029-9cff90e89751
 	github.com/fsnotify/fsnotify v1.4.7 // indirect
 	github.com/ghodss/yaml v1.0.0
 	github.com/giantswarm/semver-bump v0.0.0-20140912095342-88e6c9f2fe39

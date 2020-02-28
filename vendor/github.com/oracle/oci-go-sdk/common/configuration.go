@@ -51,7 +51,7 @@ type rawConfigurationProvider struct {
 	privateKeyPassphrase *string
 }
 
-// NewRawConfigurationProvider will create a ConfigurationProvider with the arguments of the function
+// NewRawConfigurationProvider will create a rawConfigurationProvider
 func NewRawConfigurationProvider(tenancy, user, region, fingerprint, privateKey string, privateKeyPassphrase *string) ConfigurationProvider {
 	return rawConfigurationProvider{tenancy, user, region, fingerprint, privateKey, privateKeyPassphrase}
 }

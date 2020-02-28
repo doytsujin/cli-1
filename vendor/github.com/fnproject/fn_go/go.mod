@@ -1,5 +1,7 @@
 module github.com/fnproject/fn_go
 
+replace github.com/oracle/oci-go-sdk => bitbucket.oci.oraclecorp.com/sdk/oci-go-sdk.git v1.0.1-0.20191218185907-389f38d36df3
+
 require (
 	github.com/PuerkitoBio/purell v1.1.0 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
