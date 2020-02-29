@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/fnproject/fn_go"
 	"github.com/fnproject/fn_go/provider"
 	"github.com/spf13/viper"
 	"github.com/urfave/cli"
@@ -30,13 +31,36 @@ const (
 
 	EnvFnRegistry = "registry"
 	EnvFnContext  = "context"
+
+	OCI_CLI_AUTH_ENV_VAR            = "OCI_CLI_AUTH"
+	OCI_CLI_AUTH_INSTANCE_PRINCIPAL = "instance_principal"
+	OCI_CLI_AUTH_INSTANCE_OBO_USER  = "instance_obo_user"
 )
 
 var defaultRootConfigContents = &ContextMap{CurrentContext: "", CurrentCliVersion: ""}
-var DefaultContextConfigContents = &ContextMap{
-	ContextProvider:      DefaultProvider,
-	provider.CfgFnAPIURL: defaultLocalAPIURL,
-	EnvFnRegistry:        "",
+
+func DefaultContextConfigContents() (contextMap *ContextMap) {
+	ociCliAuth := os.Getenv(OCI_CLI_AUTH_ENV_VAR)
+
+	if ociCliAuth == OCI_CLI_AUTH_INSTANCE_OBO_USER {
+		contextMap = &ContextMap{
+			ContextProvider: fn_go.OracleCSProvider,
+			EnvFnRegistry:   "",
+		}
+	} else if ociCliAuth == OCI_CLI_AUTH_INSTANCE_OBO_USER {
+		contextMap = &ContextMap{
+			ContextProvider: fn_go.OracleIPProvider,
+			EnvFnRegistry:   "",
+		}
+	} else {
+		contextMap = &ContextMap{
+			ContextProvider:      fn_go.DefaultProvider,
+			provider.CfgFnAPIURL: defaultLocalAPIURL,
+			EnvFnRegistry:        "",
+		}
+	}
+
+	return contextMap
 }
 
 type ContextMap map[string]string
@@ -49,7 +73,7 @@ func Init() error {
 	replacer := strings.NewReplacer("-", "_")
 	viper.SetEnvKeyReplacer(replacer)
 
-	//	viper.SetDefault(provider.CfgFnAPIURL, defaultLocalAPIURL)
+	//viper.SetDefault(provider.CfgFnAPIURL, defaultLocalAPIURL)
 
 	return ensureConfiguration()
 }
@@ -92,7 +116,7 @@ func ensureConfiguration() error {
 			return fmt.Errorf("error creating default.yaml context file %v", err)
 		}
 
-		err = WriteYamlFile(defaultContextPath, DefaultContextConfigContents)
+		err = WriteYamlFile(defaultContextPath, DefaultContextConfigContents())
 		if err != nil {
 			return err
 		}

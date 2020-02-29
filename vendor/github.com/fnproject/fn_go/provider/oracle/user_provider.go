@@ -52,6 +52,7 @@ func NewFromConfig(configSource provider.ConfigSource, passphraseSource provider
 	}, nil
 }
 
+//TODO support OCI environment variables
 func loadOracleConfig(config provider.ConfigSource, passphrase provider.PassPhraseSource) (string, *rsa.PrivateKey, error) {
 	var oracleProfile string
 	var err error

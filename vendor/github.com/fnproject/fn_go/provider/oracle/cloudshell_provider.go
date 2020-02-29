@@ -29,7 +29,7 @@ func NewCSProvider(configSource provider.ConfigSource, passphraseSource provider
 
 	// Derive oracle.profile from context or environment
 	oraProfile := configSource.GetString(CfgProfile)
-	envOraProfile := os.Getenv("OCI_CLI_PROFILE")
+	envOraProfile := os.Getenv(OCI_CLI_PROFILE_ENV_VAR)
 	if envOraProfile != "" {
 		oraProfile = envOraProfile
 	}
@@ -44,7 +44,7 @@ func NewCSProvider(configSource provider.ConfigSource, passphraseSource provider
 	}
 
 	// Now we read config from environment to either override base config, or instead of if config existed.
-	region := os.Getenv("OCI_CLI_REGION")
+	region := os.Getenv(OCI_CLI_REGION_ENV_VAR)
 	if region != "" {
 		csConfig.region = region
 	}
@@ -52,7 +52,7 @@ func NewCSProvider(configSource provider.ConfigSource, passphraseSource provider
 		return nil, fmt.Errorf("Could not derive region from eiher config or environment.")
 	}
 
-	tenancyID := os.Getenv("OCI_CLI_TENANCY")
+	tenancyID := os.Getenv(OCI_CLI_TENANCY_ENV_VAR)
 	if tenancyID != "" {
 		csConfig.tenancyID = tenancyID
 	}
@@ -60,7 +60,7 @@ func NewCSProvider(configSource provider.ConfigSource, passphraseSource provider
 		return nil, fmt.Errorf("Could not derive tenancy ID from eiher config or environment.")
 	}
 
-	delegationTokenFile := os.Getenv("OCI_CLI_DELEGATION_TOKEN_FILE")
+	delegationTokenFile := os.Getenv(OCI_CLI_DELEGATION_TOKEN_FILE_ENV_VAR)
 	if delegationTokenFile != "" {
 		csConfig.delegationTokenFile = delegationTokenFile
 	}
@@ -111,7 +111,7 @@ func loadCSOracleConfig(profileName string, passphrase provider.PassPhraseSource
 	var err error
 	var cf oci.ConfigurationProvider
 
-	path := os.Getenv("OCI_CLI_CONFIG_FILE")
+	path := os.Getenv(OCI_CLI_CONFIG_FILE_ENV_VAR)
 	if _, err := os.Stat(path); err == nil {
 		cf, err = oci.ConfigurationProviderFromFileWithProfile(path, profileName, "")
 		if err != nil {

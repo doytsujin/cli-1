@@ -18,14 +18,19 @@ import (
 )
 
 const (
-	CfgTenancyID              = "oracle.tenancy-id"
-	CfgProfile                = "oracle.profile"
-	CfgCompartmentID          = "oracle.compartment-id"
-	CfgDisableCerts           = "oracle.disable-certs"
-	CompartmentMetadata       = "http://169.254.169.254/opc/v1/instance/compartmentId"
-	FunctionsAPIURLTmpl       = "https://functions.%s.oraclecloud.com"
-	requestHeaderOpcRequestID = "Opc-Request-Id"
-	requestHeaderOpcCompId    = "opc-compartment-id"
+	CfgTenancyID                          = "oracle.tenancy-id"
+	CfgProfile                            = "oracle.profile"
+	CfgCompartmentID                      = "oracle.compartment-id"
+	CfgDisableCerts                       = "oracle.disable-certs"
+	CompartmentMetadata                   = "http://169.254.169.254/opc/v1/instance/compartmentId"
+	FunctionsAPIURLTmpl                   = "https://functions.%s.oraclecloud.com"
+	requestHeaderOpcRequestID             = "Opc-Request-Id"
+	requestHeaderOpcCompId                = "opc-compartment-id"
+	OCI_CLI_PROFILE_ENV_VAR               = "OCI_CLI_PROFILE"
+	OCI_CLI_REGION_ENV_VAR                = "OCI_CLI_REGION"
+	OCI_CLI_TENANCY_ENV_VAR               = "OCI_CLI_TENANCY"
+	OCI_CLI_CONFIG_FILE_ENV_VAR           = "OCI_CLI_CONFIG_FILE"
+	OCI_CLI_DELEGATION_TOKEN_FILE_ENV_VAR = "OCI_CLI_DELEGATION_TOKEN_FILE"
 )
 
 type Response struct {
@@ -127,7 +132,7 @@ func (t ociSigningRoundTripper) intercept(request *http.Request) (err error) {
 
 	}
 	// set opc-compartment-id
-	request.Header.Set("opc-compartment-id", t.compartmentID)
+	request.Header.Set(requestHeaderOpcCompId, t.compartmentID)
 
 	// call interceptor
 	if t.interceptor != nil {
