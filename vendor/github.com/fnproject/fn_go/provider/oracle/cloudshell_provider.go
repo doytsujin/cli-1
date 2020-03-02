@@ -34,7 +34,7 @@ func NewCSProvider(configSource provider.ConfigSource, passphraseSource provider
 		oraProfile = envOraProfile
 	}
 	// If the oracle.profile in env or context isn't DEFAULT then derive config from OCI profile
-	if (oraProfile != "") && (oraProfile != "DEFAULT") {
+	if oraProfile != "" {
 		csConfig, err = loadCSOracleConfig(oraProfile, passphraseSource)
 		if err != nil {
 			return nil, err
@@ -78,7 +78,7 @@ func NewCSProvider(configSource provider.ConfigSource, passphraseSource provider
 	if err != nil {
 		return nil, err
 	}
-	os.Stdout.WriteString("apiUrl:" + apiUrl.String())
+	//os.Stdout.WriteString("apiUrl:" + apiUrl.String())
 
 	// If the compartment ID wasn't specified in the context, we default to the root compartment by using
 	// the tenancy ID.

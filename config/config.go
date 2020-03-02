@@ -37,7 +37,7 @@ const (
 	OCI_CLI_AUTH_INSTANCE_OBO_USER  = "instance_obo_user"
 )
 
-var defaultRootConfigContents = &ContextMap{CurrentContext: "", CurrentCliVersion: ""}
+var defaultRootConfigContents = &ContextMap{CurrentContext: "default", CurrentCliVersion: Version}
 
 func DefaultContextConfigContents() (contextMap *ContextMap) {
 	ociCliAuth := os.Getenv(OCI_CLI_AUTH_ENV_VAR)
@@ -58,6 +58,7 @@ func DefaultContextConfigContents() (contextMap *ContextMap) {
 			provider.CfgFnAPIURL: defaultLocalAPIURL,
 			EnvFnRegistry:        "",
 		}
+		viper.SetDefault(provider.CfgFnAPIURL, defaultLocalAPIURL)
 	}
 
 	return contextMap
@@ -72,8 +73,6 @@ func Init() error {
 
 	replacer := strings.NewReplacer("-", "_")
 	viper.SetEnvKeyReplacer(replacer)
-
-	//viper.SetDefault(provider.CfgFnAPIURL, defaultLocalAPIURL)
 
 	return ensureConfiguration()
 }

@@ -19,6 +19,8 @@ github.com/fnproject/fn_go v0.0.0-20200228195029-9cff90e89751 h1:R0wdbrDImJ14f3F
 github.com/fnproject/fn_go v0.0.0-20200228195029-9cff90e89751/go.mod h1:q5rR/tCmiHDrvdH57awJIUbHYueDkFNUwcD37wq92/E=
 github.com/fnproject/fn_go v0.0.0-20200228235014-822e02cfc800 h1:RC0E8aeGJ3BLTK+9lf4sloJRCaEHYZUj/Is/mwONQJA=
 github.com/fnproject/fn_go v0.0.0-20200228235014-822e02cfc800/go.mod h1:q5rR/tCmiHDrvdH57awJIUbHYueDkFNUwcD37wq92/E=
+github.com/fnproject/fn_go v0.0.0-20200302225633-209122efdf3b h1:gC8GGeeB8soGJK3rm7Epoo9vjGXnIH46KVFycTI6WZg=
+github.com/fnproject/fn_go v0.0.0-20200302225633-209122efdf3b/go.mod h1:q5rR/tCmiHDrvdH57awJIUbHYueDkFNUwcD37wq92/E=
 github.com/fnproject/fn_go v0.5.0 h1:LrHtbe1djT8I2tPBFBAUqprWaOzMLCa2rOIxlVI3BEU=
 github.com/fnproject/fn_go v0.5.0/go.mod h1:PLIqk9ACBPYbaR74k/4a4I1HAjDYRPovUVVpYgr4sxY=
 github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV9I=
